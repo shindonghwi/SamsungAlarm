@@ -14,6 +14,7 @@
         android:layout_height="0dp"
         android:layout_weight="0.4"
         android:text="시간설정하는곳"
+        android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
