@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ef0078</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="background_color">#e9ecef</color>
+
+
+    <!-- MainActivity.kt 화면 하단에 바텀 네이게이션 배경색상 -->
+<!--    <color name="bottom_navigation_bg">#e9ecef</color>-->
+</resources>

@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">SamsungAlarm</string>
+
+    <!-- MainActivity.kt 화면 하단에 있는 기능 4개    -->
+    <string name="bottom_item_alarm">알람</string>
+    <string name="bottom_item_world_time">세계시간</string>
+    <string name="bottom_item_stop_watch">스톱워치</string>
+    <string name="bottom_item_timer">타이머</string>
+
+
+    <!-- alarm_fragment.kt    -->
+    <string name="alarm_content_text">알람 남은 시간 표시</string>
+    <string name="alarm_time_text">알람 설정 시간 표시</string>
+    <!-- 알람 내용 아이템 - 리사이클러뷰     -->
+    <string name="recycler_alarm_is_am">오전</string>
+    <string name="recycler_alarm_time">5:00</string>
+    <string name="recycler_alarm_day">3월 1일 (일)</string>
+
+
+</resources>

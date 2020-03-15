@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_alarm"
+        android:icon="@drawable/bottom_item_alarm"
+        android:title="@string/bottom_item_alarm" />
+
+
+    <item
+        android:id="@+id/navigation_world_time"
+        android:icon="@drawable/bottom_item_world_time"
+        android:title="@string/bottom_item_world_time" />
+
+
+    <item
+        android:id="@+id/navigation_stop_watch"
+        android:icon="@drawable/bottom_item_stopwatch"
+        android:title="@string/bottom_item_stop_watch" />
+
+
+    <item
+        android:id="@+id/navigation_timer"
+        android:icon="@drawable/bottom_item_timer"
+        android:title="@string/bottom_item_timer" />
+
+
+</menu>
