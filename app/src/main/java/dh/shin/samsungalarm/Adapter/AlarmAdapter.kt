@@ -1,6 +1,7 @@
 package dh.shin.samsungalarm.Adapter
 
 import android.content.Context
+import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,10 +14,10 @@ import dh.shin.samsungalarm.RecyclerViewItem.AlarmContent
 
 
 class AlarmAdapter(
-    val context: Context,
-    val alarm_list: ArrayList<AlarmContent>,
-    var selected_flag: HashMap<Int, Boolean>,
-    val delete_mode: Boolean
+    private val context: Context,
+    private val adpaterAlarmList: ArrayList<AlarmContent>,
+    private var adpaterSelectedFlag: SparseBooleanArray,
+    private val adpaterDeleteMode: Boolean
 ) :
 
     RecyclerView.Adapter<AlarmAdapter.Holder>() {
@@ -27,7 +28,7 @@ class AlarmAdapter(
             .inflate(R.layout.alarm_content_item, parent, false)
 
         // 삭제 모드가 아니라면, 삭제체크박스 off, 알람스위치 on
-        if (delete_mode == false) {
+        if (!adpaterDeleteMode) {
             view.findViewById<CheckBox>(R.id.recycler_delete_btn).visibility = View.GONE
             view.findViewById<Switch>(R.id.recycler_alarm_switch).visibility = View.VISIBLE
         }
@@ -42,35 +43,35 @@ class AlarmAdapter(
     }
 
     override fun getItemCount(): Int {
-        return alarm_list.size
+        return adpaterAlarmList.size
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.bind(alarm_list[position])
+        holder.bind(adpaterAlarmList[position])
 
-        holder.alarm_sw.isChecked = selected_flag.get(position) != false
+        holder.alarmSwitchMode.isChecked = adpaterSelectedFlag.get(position) != false
 
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val is_am = itemView.findViewById<TextView>(R.id.recycler_is_am_text)
-        val time =
+        val isAm = itemView.findViewById<TextView>(R.id.recycler_is_am_text)
+        val alarmTime =
             itemView.findViewById<TextView>(R.id.recycler_alarm_time_text)
-        val day = itemView.findViewById<TextView>(R.id.recycler_alarm_day_text)
-        val alarm_sw =
+        val alarmDay = itemView.findViewById<TextView>(R.id.recycler_alarm_day_text)
+        val alarmSwitchMode =
             itemView.findViewById<Switch>(R.id.recycler_alarm_switch)
 
         fun bind(alarm_content: AlarmContent) {
-            is_am.text = alarm_content.is_am
-            time.text = alarm_content.time
-            day.text = alarm_content.day
+            isAm.text = alarm_content.is_am
+            alarmTime.text = alarm_content.time
+            alarmDay.text = alarm_content.day
 
-            alarm_sw.setOnClickListener(View.OnClickListener {
+            alarmSwitchMode.setOnClickListener(View.OnClickListener {
                 val pos = adapterPosition
-                if (selected_flag.get(pos) == false) {
-                    selected_flag.put(pos, true)
+                if (adpaterSelectedFlag.get(pos) == false) {
+                    adpaterSelectedFlag.put(pos, true)
                 } else {
-                    selected_flag.put(pos, false)
+                    adpaterSelectedFlag.put(pos, false)
                 }
             })
 

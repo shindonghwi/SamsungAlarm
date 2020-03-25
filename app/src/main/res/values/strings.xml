@@ -25,4 +25,9 @@
     <string name="delete_all_text">전체</string>
 
 
+    <!-- AlramAddActivity.kt    -->
+    <string name="cancel_text">취소</string>
+    <string name="check_text">확인</string>
+
+
 </resources>

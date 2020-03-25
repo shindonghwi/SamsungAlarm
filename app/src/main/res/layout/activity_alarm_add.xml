@@ -132,8 +132,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
                 android:weightSum="1">
 
                 <LinearLayout
@@ -166,7 +166,7 @@
 
                     <Switch
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -176,14 +176,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:hint="알람 이름"/>
+                android:hint="알람 이름" />
 
             <!-- 알람음 설정하기 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
                 android:weightSum="1">
 
                 <LinearLayout
@@ -216,7 +216,7 @@
 
                     <Switch
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -225,8 +225,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
                 android:weightSum="1">
 
                 <LinearLayout
@@ -259,7 +259,7 @@
 
                     <Switch
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -268,8 +268,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginBottom="20dp"
+                android:orientation="horizontal"
                 android:weightSum="1">
 
                 <LinearLayout
@@ -302,7 +302,7 @@
 
                     <Switch
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -310,5 +310,32 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/cancel_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text="@string/cancel_text"
+            android:textColor="@color/appThemeColor"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/check_text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:text="@string/check_text"
+            android:textColor="@color/appThemeColor"
+            android:textSize="20sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

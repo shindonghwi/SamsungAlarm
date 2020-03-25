@@ -6,6 +6,7 @@ import android.os.Handler
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import dh.shin.samsungalarm.Fragment.StopWatchFragment
 import dh.shin.samsungalarm.Fragment.TimerFragment
 import dh.shin.samsungalarm.Fragment.WorldTimeFragment
@@ -13,22 +14,24 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val alarm_fragment = AlarmFragment()
-    val world_time_fragment = WorldTimeFragment()
-    val stop_watch_fragment = StopWatchFragment()
-    val timer_fragment = TimerFragment()
+    private val alarmFragment = AlarmFragment() // 알람 프래그먼트
+    private val worldTimeFragment = WorldTimeFragment() // 세계시간 보여주는 프래그먼트
+    private val stopWatchFragment = StopWatchFragment() // 스톱워치 기능이 있는 프래그먼트
+    private val timerFragment = TimerFragment() // 타이머 기능이 있는 프래그먼트
+    private var backBtnCheck = false // 뒤로가기 버튼 클릭 여부 체크
 
-    var doubleBackToExitPressedOnce = false
-
-    lateinit var back_listener : onKeyBackPressedListener
+    private lateinit var fragmentManager: FragmentManager // 프래그먼트 관리자
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        loadFragment(alarm_fragment)
+        // 프래그먼트 관리자 생성
+        fragmentManager = supportFragmentManager
 
-        back_listener.onBack()
+        // 프래그먼트 교체하기 ( 화면 하단의 메뉴를 통해 화면전환 기능 )
+        replaceFragment(alarmFragment)
+
     }
 
     override fun onResume() {
@@ -37,19 +40,19 @@ class MainActivity : AppCompatActivity() {
         navigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.navigation_alarm -> {
-                    loadFragment(alarm_fragment)
+                    replaceFragment(alarmFragment)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_world_time -> {
-                    loadFragment(world_time_fragment)
+                    replaceFragment(worldTimeFragment)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_stop_watch -> {
-                    loadFragment(stop_watch_fragment)
+                    replaceFragment(stopWatchFragment)
                     return@setOnNavigationItemSelectedListener true
                 }
                 R.id.navigation_timer -> {
-                    loadFragment(timer_fragment)
+                    replaceFragment(timerFragment)
                     return@setOnNavigationItemSelectedListener true
                 }
 
@@ -59,39 +62,34 @@ class MainActivity : AppCompatActivity() {
     }
 
     // 프래그먼트 불러오는 메서드
-    private fun loadFragment(fragment: Fragment) {
+    private fun replaceFragment(fragment: Fragment) {
 
         // load fragment
-        val transaction = supportFragmentManager.beginTransaction()
+        val transaction = fragmentManager.beginTransaction()
 
-        // frame_layout 부분을 fragment로 갈아끼우겠다.
+        // frame_layout 부분을 화면 하단에 선택한 아이템의 프래그먼트로 교체한다.
         transaction.replace(R.id.frame_layout, fragment)
 
         // 변경사항을 적용
         transaction.commit()
     }
 
+    /**
+     * 뒤로가기 버튼 클릭을 했을때 호출되는 메서드
+     * 2번 연속으로 클릭시 앱 종료가 된다.
+     * */
     override fun onBackPressed() {
-        if (doubleBackToExitPressedOnce) {
+        if (backBtnCheck) {
             super.onBackPressed()
             return
         }
 
         // 액티비티를 바로 종료 시킬 수 있는 상태로 만든다 -> true
-        this.doubleBackToExitPressedOnce = true
+        this.backBtnCheck = true
         Toast.makeText(this, "뒤로가기 버튼을 한번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show()
 
         // 2초가 지나면 액티비티를 바로 종료 시킬 수 없다.
-        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+        Handler().postDelayed({ backBtnCheck = false }, 2000)
     }
-
-    public interface onKeyBackPressedListener{
-        fun onBack()
-    }
-
-    public fun setOnKeyBackPressedListener(listener : onKeyBackPressedListener){
-        back_listener = listener
-    }
-
 
 }
