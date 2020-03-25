@@ -20,12 +20,15 @@ class MainActivity : AppCompatActivity() {
 
     var doubleBackToExitPressedOnce = false
 
+    lateinit var back_listener : onKeyBackPressedListener
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         loadFragment(alarm_fragment)
 
+        back_listener.onBack()
     }
 
     override fun onResume() {
@@ -81,5 +84,14 @@ class MainActivity : AppCompatActivity() {
         // 2초가 지나면 액티비티를 바로 종료 시킬 수 없다.
         Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
     }
+
+    public interface onKeyBackPressedListener{
+        fun onBack()
+    }
+
+    public fun setOnKeyBackPressedListener(listener : onKeyBackPressedListener){
+        back_listener = listener
+    }
+
 
 }

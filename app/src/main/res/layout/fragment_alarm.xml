@@ -37,27 +37,55 @@
     <!-- 알람을 추가하거나 기타 설정 버튼이 있는 공간-->
 
     <LinearLayout
+        android:id="@+id/setting_l_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginRight="8dp"
         android:layout_weight="0.1"
-        android:gravity="right|center_vertical"
-        android:orientation="horizontal">
+        android:paddingLeft="16dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:id="@+id/delete_mode_l_layout"
+            android:layout_width="0dp"
+            android:visibility="invisible"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:orientation="vertical">
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete_all_text" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.7" />
 
         <ImageButton
             android:id="@+id/add_alarm_image_btn"
-            android:layout_width="40dp"
+            android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginRight="16dp"
+            android:layout_weight="0.1"
             android:background="@android:color/transparent"
             android:padding="8dp"
             android:scaleType="centerCrop"
             android:src="@drawable/alarm_add" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="40dp"
+            android:id="@+id/alarm_setting_image_btn"
+            android:layout_width="0dp"
             android:layout_height="40dp"
+            android:layout_weight="0.1"
             android:background="@android:color/transparent"
             android:padding="8dp"
             android:scaleType="centerCrop"
@@ -67,6 +95,7 @@
     <!-- 설정한 알람이 표시될 공간-->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/alarm_recyclerView"
+        android:background="@drawable/border_only_round"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.55" />

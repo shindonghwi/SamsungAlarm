@@ -4,16 +4,19 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import dh.shin.samsungalarm.R
 import dh.shin.samsungalarm.RecyclerViewItem.AlarmContent
 
 
 class AlarmAdapter(
     val context: Context,
     val alarm_list: ArrayList<AlarmContent>,
-    var selected_flag: HashMap<Int, Boolean>
+    var selected_flag: HashMap<Int, Boolean>,
+    val delete_mode: Boolean
 ) :
 
     RecyclerView.Adapter<AlarmAdapter.Holder>() {
@@ -21,7 +24,20 @@ class AlarmAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
 
         val view = LayoutInflater.from(context)
-            .inflate(dh.shin.samsungalarm.R.layout.alarm_content_item, parent, false)
+            .inflate(R.layout.alarm_content_item, parent, false)
+
+        // 삭제 모드가 아니라면, 삭제체크박스 off, 알람스위치 on
+        if (delete_mode == false) {
+            view.findViewById<CheckBox>(R.id.recycler_delete_btn).visibility = View.GONE
+            view.findViewById<Switch>(R.id.recycler_alarm_switch).visibility = View.VISIBLE
+        }
+
+        // 삭제 모드가 아니라면, 삭제체크박스 on, 알람스위치 off
+        else {
+            view.findViewById<CheckBox>(R.id.recycler_delete_btn).visibility = View.VISIBLE
+            view.findViewById<Switch>(R.id.recycler_alarm_switch).visibility = View.GONE
+        }
+
         return Holder(view)
     }
 
@@ -37,12 +53,12 @@ class AlarmAdapter(
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val is_am = itemView.findViewById<TextView>(dh.shin.samsungalarm.R.id.recycler_is_am_text)
+        val is_am = itemView.findViewById<TextView>(R.id.recycler_is_am_text)
         val time =
-            itemView.findViewById<TextView>(dh.shin.samsungalarm.R.id.recycler_alarm_time_text)
-        val day = itemView.findViewById<TextView>(dh.shin.samsungalarm.R.id.recycler_alarm_day_text)
+            itemView.findViewById<TextView>(R.id.recycler_alarm_time_text)
+        val day = itemView.findViewById<TextView>(R.id.recycler_alarm_day_text)
         val alarm_sw =
-            itemView.findViewById<Switch>(dh.shin.samsungalarm.R.id.recycler_alarm_switch)
+            itemView.findViewById<Switch>(R.id.recycler_alarm_switch)
 
         fun bind(alarm_content: AlarmContent) {
             is_am.text = alarm_content.is_am
