@@ -4,13 +4,21 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import dh.shin.samsungalarm.Util.PreferenceUtil
 import kotlinx.android.synthetic.main.activity_alarm_add.*
 
 class AlarmAddActivity : AppCompatActivity() {
 
+    private lateinit var prefsUtil : PreferenceUtil
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alarm_add)
+
+        // 알람 저장을 위해서 쉐어드 프리퍼런스 유틸 생성
+        prefsUtil = PreferenceUtil(this, "alarmShared")
+
     }
 
     override fun onResume() {

@@ -20,6 +20,7 @@ import dh.shin.samsungalarm.Adapter.AlarmAdapter
 import dh.shin.samsungalarm.AlarmAddActivity
 import dh.shin.samsungalarm.R
 import dh.shin.samsungalarm.RecyclerViewItem.AlarmContent
+import dh.shin.samsungalarm.Util.PreferenceUtil
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.alarm_content_item.*
 import kotlinx.android.synthetic.main.fragment_alarm.*
@@ -27,9 +28,19 @@ import kotlinx.android.synthetic.main.fragment_alarm.*
 
 class AlarmFragment : Fragment() {
 
-    private var deleteMode: Boolean = false // 알람을 보여주는 형태가 삭제모드인가 아닌가를 나타내는 변수
+    // 알람을 보여주는 형태가 삭제모드인가 아닌가를 나타내는 변수
+    private var deleteMode: Boolean = false
 
-    private val ADD_ACTIVITY_RESULT_CODE = 1
+//    private val ADD_ACTIVITY_RESULT_CODE = 1
+
+    // 프리퍼런스 유틸 생성 ( 알람프래그먼트에서는 저장된 알람의 정보를 가져오기 위해 사용 할 예정)
+    private lateinit var prefsUtil : PreferenceUtil
+
+    // 알람 데이터 리스트가 담기는 공간
+    var alarmList = ArrayList<AlarmContent>()
+
+    // 알람의 on/off 상태를 가지고 있는 리스트
+    var alarmSelectedFlagList = SparseBooleanArray()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,6 +52,9 @@ class AlarmFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // 프리퍼런스 유틸 생성
+        prefsUtil = PreferenceUtil(this.requireContext(), "alarmShared")
 
         // 레이아웃 매니저 - 리사이클러뷰 연결
         alarm_recyclerView.layoutManager = LinearLayoutManager(context)
@@ -57,7 +71,7 @@ class AlarmFragment : Fragment() {
         // 알람 추가하는 화면으로 이동
         add_alarm_image_btn.setOnClickListener {
             val intent = Intent(context, AlarmAddActivity::class.java)
-            startActivityForResult(intent, ADD_ACTIVITY_RESULT_CODE)
+            startActivity(intent)
         }
 
         val popUpListener = View.OnClickListener { view ->
@@ -71,7 +85,7 @@ class AlarmFragment : Fragment() {
         alarm_setting_image_btn.setOnClickListener(popUpListener)
     }
 
-    private fun showPopup(view: View, alram_activity: FragmentActivity?) {
+    private fun showPopup(view: View, alarmActivity: FragmentActivity?) {
         val popup: PopupMenu?
         popup = PopupMenu(activity, view)
         popup.inflate(R.menu.alarm_setting_menu)
@@ -107,8 +121,8 @@ class AlarmFragment : Fragment() {
                     alarm_setting_image_btn.visibility = View.GONE
 
                     // 하단 메뉴바 안보이게 처리
-                    if (alram_activity != null) {
-                        alram_activity.findViewById<BottomNavigationView>(R.id.navigationView)
+                    if (alarmActivity != null) {
+                        alarmActivity.findViewById<BottomNavigationView>(R.id.navigationView)
                             .visibility = View.INVISIBLE
                     }
 
@@ -133,29 +147,24 @@ class AlarmFragment : Fragment() {
         popup.show()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == Activity.RESULT_OK) {
-            if (data != null){
-                when (requestCode) {
-                    // 요청코드가 알람추가 화면으로 이동하는 것(=1) 이라면
-                    ADD_ACTIVITY_RESULT_CODE -> {
-                        alarmList.add(AlarmContent("오전", "5:00", "3월 16일 (월)"))
-                        alarmSelectedFlagList.put(alarmList.size,data.getBooleanExtra("alarm_switch_mode",false))
-                        (alarm_recyclerView.adapter as AlarmAdapter).notifyDataSetChanged()
-                    }
-                }
-            }
-        }
-    }
-
-    companion object {
-        // 알람 데이터 리스트가 담기는 공간
-        var alarmList = ArrayList<AlarmContent>()
-
-        // 알람의 on/off 상태를 가지고 있는 리스트
-        var alarmSelectedFlagList = SparseBooleanArray()
-    }
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (resultCode == Activity.RESULT_OK) {
+//            if (data != null) {
+//                when (requestCode) {
+//                    // 요청코드가 알람추가 화면으로 이동하는 것(=1) 이라면
+//                    ADD_ACTIVITY_RESULT_CODE -> {
+//                        alarmList.add(AlarmContent("오전", "5:00", "3월 16일 (월)"))
+//                        alarmSelectedFlagList.put(
+//                            alarmList.size - 1,
+//                            data.getBooleanExtra("alarm_switch_mode", false)
+//                        )
+//                        (alarm_recyclerView.adapter as AlarmAdapter).notifyDataSetChanged()
+//                    }
+//                }
+//            }
+//        }
+//    }
 
 }
 
