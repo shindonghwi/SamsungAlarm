@@ -1,4 +1,4 @@
-package dh.shin.samsungalarm.Fragment
+package dh.shin.samsungalarm.Timer
 
 import android.os.Bundle
 import android.view.LayoutInflater

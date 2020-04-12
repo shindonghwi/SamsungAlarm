@@ -7,7 +7,7 @@
     android:background="@color/background_color"
     android:orientation="vertical"
     android:weightSum="1"
-    tools:context=".AlarmAddActivity">
+    tools:context=".Alarm.AlarmAddActivity">
 
     <TextView
         android:layout_width="match_parent"

@@ -1,28 +1,18 @@
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.os.Parcelable
-import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.*
 import android.widget.PopupMenu
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationView
 import dh.shin.samsungalarm.Adapter.AlarmAdapter
-import dh.shin.samsungalarm.AlarmAddActivity
+import dh.shin.samsungalarm.Alarm.AlarmAddActivity
 import dh.shin.samsungalarm.R
 import dh.shin.samsungalarm.RecyclerViewItem.AlarmContent
 import dh.shin.samsungalarm.Util.PreferenceUtil
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.alarm_content_item.*
 import kotlinx.android.synthetic.main.fragment_alarm.*
 
 
@@ -74,6 +64,7 @@ class AlarmFragment : Fragment() {
             startActivity(intent)
         }
 
+        // 알람 추가 옆 메뉴 버튼을 눌렀을때 팝업창이 나타난다. ( 삭제, 설정, 문의하기 )
         val popUpListener = View.OnClickListener { view ->
             when (view.id) {
                 R.id.alarm_setting_image_btn -> {

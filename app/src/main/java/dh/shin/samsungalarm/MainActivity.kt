@@ -7,16 +7,18 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import dh.shin.samsungalarm.Fragment.StopWatchFragment
-import dh.shin.samsungalarm.Fragment.TimerFragment
-import dh.shin.samsungalarm.Fragment.WorldTimeFragment
+import dh.shin.samsungalarm.StopWatch.StopWatchFragment
+import dh.shin.samsungalarm.Timer.TimerFragment
+import dh.shin.samsungalarm.WorldTimeFragment.WorldTimeFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     private val alarmFragment = AlarmFragment() // 알람 프래그먼트
-    private val worldTimeFragment = WorldTimeFragment() // 세계시간 보여주는 프래그먼트
-    private val stopWatchFragment = StopWatchFragment() // 스톱워치 기능이 있는 프래그먼트
+    private val worldTimeFragment =
+        WorldTimeFragment() // 세계시간 보여주는 프래그먼트
+    private val stopWatchFragment =
+        StopWatchFragment() // 스톱워치 기능이 있는 프래그먼트
     private val timerFragment = TimerFragment() // 타이머 기능이 있는 프래그먼트
     private var backBtnCheck = false // 뒤로가기 버튼 클릭 여부 체크
 

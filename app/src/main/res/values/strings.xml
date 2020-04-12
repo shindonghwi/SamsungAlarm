@@ -29,5 +29,15 @@
     <string name="cancel_text">취소</string>
     <string name="check_text">확인</string>
 
+    <!-- StopWatchFragment.kt   -->
+    <string name="time_init">00</string>
+    <string name="hour_separator">:</string>
+    <string name="minute_separator">.</string>
+    <string name="start_text">시작</string>
+    <string name="stop_watch_content_index_text">구간</string>
+    <string name="stop_watch_content_time_text">구간기록</string>
+
+
+
 
 </resources>

@@ -1,16 +1,17 @@
-package dh.shin.samsungalarm
+package dh.shin.samsungalarm.Alarm
 
-import android.app.Activity
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.google.gson.Gson
+import dh.shin.samsungalarm.R
+import dh.shin.samsungalarm.RecyclerViewItem.AlarmContent
 import dh.shin.samsungalarm.Util.PreferenceUtil
 import kotlinx.android.synthetic.main.activity_alarm_add.*
+import org.json.JSONArray
 
 class AlarmAddActivity : AppCompatActivity() {
 
     private lateinit var prefsUtil : PreferenceUtil
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +32,12 @@ class AlarmAddActivity : AppCompatActivity() {
 
         // 확인 버튼을 눌렀을때 설정한 알람이 등록된다.
         check_text.setOnClickListener {
-            val intent = Intent()
-            intent.putExtra("is_am","오전")
-            intent.putExtra("alarm_day","3월 16일 (월)")
-            intent.putExtra("alarm_time","5:00")
-            intent.putExtra("alarm_switch_mode",true)
-            setResult(Activity.RESULT_OK, intent)
+
+            var jsonArray = JSONArray()
+
+            var json = Gson().toJson(AlarmContent("오전","3월 16일 (월)", "5:00"))
+            prefsUtil.putData(Pair("alarmData",json))
+
             finish()
         }
 

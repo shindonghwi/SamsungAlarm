@@ -3,7 +3,6 @@ package dh.shin.samsungalarm.Util
 import android.content.Context
 import android.content.SharedPreferences
 
-
 class PreferenceUtil(context: Context, prefName : String) {
 
     private var prefs : SharedPreferences
@@ -23,7 +22,7 @@ class PreferenceUtil(context: Context, prefName : String) {
     }
 
     // 데이터 넣기
-    fun sharedPutData(pair: Pair<String, Any>) {
+    fun putData(pair: Pair<String, Any>) {
 
         // 키값
         val key = pair.first
@@ -38,8 +37,11 @@ class PreferenceUtil(context: Context, prefName : String) {
             else -> error("data save fail !!") // 데이터 저장 실패
         }
         editor.commit()
-
     }
 
+    // 데이터 가져오기
+    fun getData(key: String) : String{
+        return prefs.getString(key,"").toString()
+    }
 
 }
