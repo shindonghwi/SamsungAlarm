@@ -57,12 +57,6 @@ class StopWatchFragment : Fragment() {
             stop_watch_right_btn.text = "구간기록"
         }
 
-        // 시간이 흐르지 않는 중
-        else {
-            stop_watch_left_btn.visibility = View.GONE
-            stop_watch_right_btn.visibility = View.GONE
-        }
-
         // 시작버튼을 눌렀을때 시간이 흐르게 작동시킨다.
         // 스톱워치 작동여부 stopWatchFlag를 활성화 시킨다.
         stop_watch_start_btn.setOnClickListener {
